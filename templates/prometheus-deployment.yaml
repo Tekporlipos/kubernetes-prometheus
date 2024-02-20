@@ -28,11 +28,17 @@ spec:
               mountPath: /etc/prometheus/
             - name: prometheus-storage-volume
               mountPath: /prometheus/
+          resources:
+            requests:
+              memory: "256Mi"   # Request 256MB of memory
+              cpu: "100m"       # Request 100m (0.1 CPU) of CPU
+            limits:
+              memory: "512Mi"   # Limit memory usage to 512MB
+              cpu: "200m"       # Limit CPU usage to 200m (0.2 CPU)
       volumes:
         - name: prometheus-config-volume
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
-  
         - name: prometheus-storage-volume
           emptyDir: {}
